@@ -1,0 +1,64 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'java-dynamodb-mapper
+
+  Sample SAM Template for java-dynamodb-mapper
+
+  '
+Globals:
+  Function:
+    Timeout: 20
+Resources:
+  GetAllFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://yimeng-test-bucket1/d7e754960e5fcbc0d522eef833a5216f
+      Handler: helloworld.GetAll::handleRequest
+      Runtime: java8
+      MemorySize: 512
+      Policies:
+      - DynamoDBReadPolicy:
+          TableName: Status
+  CreateOneFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://yimeng-test-bucket1/6ef1f7e971d413b79e3ef2903361a1e7
+      Handler: helloworld.CreateOne::handleRequest
+      Runtime: java8
+      MemorySize: 512
+      Policies:
+      - DynamoDBWritePolicy:
+          TableName: Status
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: s3://yimeng-test-bucket1/08e2473891abb3be55b2a16126ffa7f2
+      Handler: helloworld.App::handleRequest
+      Runtime: java8
+      MemorySize: 512
+      Environment:
+        Variables:
+          PARAM1: VALUE
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /hello
+            Method: get
+Outputs:
+  HelloWorldApi:
+    Description: API Gateway endpoint URL for Prod stage for Hello World function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
+  HelloWorldFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunction
+      - Arn
+  HelloWorldFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunctionRole
+      - Arn
