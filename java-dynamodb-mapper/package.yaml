@@ -9,20 +9,33 @@ Globals:
   Function:
     Timeout: 20
 Resources:
+  StatusApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: APIGateway for Status Endpoint
+      StageName: Staging
   GetAllFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://yimeng-test-bucket1/d7e754960e5fcbc0d522eef833a5216f
+      CodeUri: s3://yimeng-test-bucket1/bc19a67f0f82750c42c9f8403c580f1c
       Handler: helloworld.GetAll::handleRequest
       Runtime: java8
       MemorySize: 512
       Policies:
       - DynamoDBReadPolicy:
           TableName: Status
+      Events:
+        GetAllApi:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: StatusApiGateway
+            Path: /status
+            Method: GET
   CreateOneFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://yimeng-test-bucket1/6ef1f7e971d413b79e3ef2903361a1e7
+      CodeUri: s3://yimeng-test-bucket1/7a79683c10a337e414681fe74859ccfb
       Handler: helloworld.CreateOne::handleRequest
       Runtime: java8
       MemorySize: 512
@@ -32,7 +45,7 @@ Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: s3://yimeng-test-bucket1/08e2473891abb3be55b2a16126ffa7f2
+      CodeUri: s3://yimeng-test-bucket1/0c98f319a817933de2a46e06a1fa2d9b
       Handler: helloworld.App::handleRequest
       Runtime: java8
       MemorySize: 512
