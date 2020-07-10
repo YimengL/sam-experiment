@@ -5,12 +5,17 @@ Description: >
 
   Sample SAM Template for java-dynamodb-mapper
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 20
 
 Resources:
+  StatusApiGateway:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: APIGateway for Status Endpoint
+      StageName: Staging
+
   GetAllFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -21,6 +26,13 @@ Resources:
       Policies:
         - DynamoDBReadPolicy:
             TableName: Status
+      Events:
+        GetAllApi:
+          Type: Api
+          Properties:
+            RestApiId: !Ref StatusApiGateway
+            Path: /status
+            Method: GET
 
   CreateOneFunction:
     Type: AWS::Serverless::Function
@@ -32,31 +44,3 @@ Resources:
       Policies:
         - DynamoDBWritePolicy:
             TableName: Status
-
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: HelloWorldFunction
-      Handler: helloworld.App::handleRequest
-      Runtime: java8
-      MemorySize: 512
-      Environment:
-        Variables:
-          PARAM1: VALUE
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /hello
-            Method: get
-
-Outputs:
-  HelloWorldApi:
-    Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
-  HelloWorldFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
