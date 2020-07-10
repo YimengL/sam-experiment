@@ -44,8 +44,7 @@ The SAM CLI reads the application template to determine the API's routes and the
 Tests are defined in the `HelloWorldFunction/src/test` folder in this project.
 
 ```shell script
-java-dynamodb-mapper $ cd HelloWorldFunction
-HelloWorldFunction $ mvn test
+$ mvn -f HelloWorldFunction/pom.xml test
 ```
 
 ```shell script
@@ -64,7 +63,7 @@ To delete the sample application that you created, use the AWS CLI. Assuming you
 name, you can run the following:
 
 ```shell script
-aws cloudformation delete-stack --stack-name SamDynamodb
+$ aws cloudformation delete-stack --stack-name SamDynamodb
 ```
 
 ## Experiment 1
