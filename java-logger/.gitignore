@@ -2,3 +2,4 @@
 .aws-sam/
 package.yaml
 HelloWorldFunction/HelloWorld.iml
+HelloWorldFunction/target/
