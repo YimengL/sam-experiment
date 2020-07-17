@@ -16,7 +16,12 @@ public class App implements RequestHandler<APIGatewayProxyRequestEvent, APIGatew
     private static final Logger logger = LoggerFactory.getLogger(App.class);
 
     public APIGatewayProxyResponseEvent handleRequest(final APIGatewayProxyRequestEvent input, final Context context) {
-        logger.error("ERROR log");
+        logger.error("[Yimeng]ERROR log");
+        logger.warn("[Yimeng]WARN log");
+        logger.info("[Yimeng]INFO log");
+        logger.debug("[Yimeng]DEBUG log");
+        logger.trace("[Yimeng]TRACE log");
+
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
         return response.withBody("hello").withStatusCode(200);
     }
