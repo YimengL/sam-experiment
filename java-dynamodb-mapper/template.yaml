@@ -5,10 +5,6 @@ Description: >
 
   Sample SAM Template for java-dynamodb-mapper
 
-Globals:
-  Function:
-    Timeout: 20
-
 Resources:
   StatusApiGateway:
     Type: AWS::Serverless::Api
@@ -23,6 +19,7 @@ Resources:
       Handler: helloworld.GetAll::handleRequest
       Runtime: java8
       MemorySize: 512
+      Timeout: 10
       Policies:
         - DynamoDBReadPolicy:
             TableName: Status
@@ -41,6 +38,20 @@ Resources:
       Handler: helloworld.CreateOne::handleRequest
       Runtime: java8
       MemorySize: 512
+      Timeout: 10
       Policies:
+        - DynamoDBWritePolicy:
+            TableName: Status
+  UpdateOneFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: HelloWorldFunction
+      Handler: helloworld.UpdateOne::handleRequest
+      Runtime: java8
+      MemorySize: 512
+      Timeout: 10
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: Status
         - DynamoDBWritePolicy:
             TableName: Status
