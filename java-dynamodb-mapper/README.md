@@ -88,3 +88,7 @@ $ sam package --output-template-file package.yaml --s3-bucket yimeng-test-bucket
 # Deploy the sam
 $ sam deploy --template-file package.yaml --stack-name SamDynamodb --capabilities CAPABILITY_IAM
 ```
+
+## Experiment 2
+
+Use
