@@ -35,8 +35,8 @@ public class CreateOne implements RequestHandler<APIGatewayProxyRequestEvent, AP
 //      Status item = objectMapper.readValue(payload, Status.class);
       Status item = new Status();
       item.setId(UUID.randomUUID());
-      item.setPayload("July/08");
-      item.setExtraCol("new col 08");
+      item.setPayload("July/14");
+      // item.setExtraCol("new col July 14");
       dynamoDB.save(item);
       return new APIGatewayProxyResponseEvent()
           .withHeaders(headers)
