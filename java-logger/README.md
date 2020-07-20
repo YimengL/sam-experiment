@@ -11,3 +11,8 @@ $ sam package --output-template-file package.yaml --s3-bucket yimeng-test-bucket
 ```shell script
 $ sam deploy --template-file package.yaml --stack-name SamJavaLogger --capabilities CAPABILITY_IAM
 ```
+
+```shell script
+# invoke function1
+$ sam local invoke LoggerFunction1
+```
