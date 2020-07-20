@@ -5,15 +5,15 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
 import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Handler for requests to Lambda function.
  */
 public class App implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-    private static final Logger logger = LoggerFactory.getLogger(App.class);
+    private static final Logger logger = LogManager.getLogger(App.class);
 
     public APIGatewayProxyResponseEvent handleRequest(final APIGatewayProxyRequestEvent input, final Context context) {
         logger.error("[Yimeng]ERROR log");
@@ -21,6 +21,8 @@ public class App implements RequestHandler<APIGatewayProxyRequestEvent, APIGatew
         logger.info("[Yimeng]INFO log");
         logger.debug("[Yimeng]DEBUG log");
         logger.trace("[Yimeng]TRACE log");
+
+        logger.warn("Log level: " + System.getenv("LOG_LEVEL"));
 
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
         return response.withBody("hello").withStatusCode(200);

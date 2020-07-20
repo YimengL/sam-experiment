@@ -19,4 +19,4 @@ Resources:
       MemorySize: 512
       Environment:
         Variables:
-          PARAM1: VALUE
+          LOG_LEVEL: WARN
