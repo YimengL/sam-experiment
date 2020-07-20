@@ -14,5 +14,8 @@ $ sam deploy --template-file package.yaml --stack-name SamJavaLogger --capabilit
 
 ```shell script
 # invoke function1
-$ sam local invoke LoggerFunction1
+$ sam local invoke LoggerFunctionWARN
+
+# invoke function2
+$ sam local invoke LoggerFunctionDEBUG
 ```
