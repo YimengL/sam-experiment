@@ -16,11 +16,11 @@ public class App implements RequestHandler<APIGatewayProxyRequestEvent, APIGatew
     private static final Logger logger = LogManager.getLogger(App.class);
 
     public APIGatewayProxyResponseEvent handleRequest(final APIGatewayProxyRequestEvent input, final Context context) {
-        logger.error("[App]ERROR log");
-        logger.warn("[App]WARN log");
-        logger.info("[App]INFO log");
-        logger.debug("[App]DEBUG log");
-        logger.trace("[App]TRACE log");
+        logger.error("Hello 1");
+        logger.warn("Hello 2");
+        logger.info("Hello 3");
+        logger.debug("Hello 4");
+        logger.trace("Hello 5");
 
         logger.warn("Log level: " + System.getenv("LOG_LEVEL"));
 
