@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  step-funtions
+
+  Sample SAM Template for step-funtions
+
+Resources:
+
+  Hello1:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/hello1/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+
+  Hello2:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/hello2/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+
+  HelloStateMachine:
+    Type: AWS::Serverless::StateMachine
+    Properties:
+      DefinitionUri: statemachine/hello.asl.json
+      DefinitionSubstitutions:
+        Hello1FunctionArn: !GetAtt Hello1.Arn
+        Hello2FunctionArn: !GetAtt Hello2.Arn
+      Policies:
+        - LambdaInvokePolicy:
+            FunctionName: !Ref Hello1
+        - LambdaInvokePolicy:
+            FunctionName: !Ref Hello2

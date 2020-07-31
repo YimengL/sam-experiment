@@ -1,0 +1,16 @@
+{
+  "Comment": "A state machine that do hello world.",
+  "StartAt": "hello1",
+  "States": {
+    "hello1": {
+      "Type": "Task",
+      "Resource": "${Hello1FunctionArn}",
+      "Next": "hello2"
+    },
+    "hello2": {
+      "Type": "Task",
+      "Resource": "${Hello2FunctionArn}",
+      "End": true
+    }
+  }
+}
