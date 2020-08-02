@@ -246,3 +246,4 @@ $RECYCLE.BIN/
 .idea/
 package.yaml
 test_files/
+.vscode/
