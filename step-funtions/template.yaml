@@ -13,6 +13,10 @@ Resources:
       CodeUri: functions/hello1/
       Handler: app.lambda_handler
       Runtime: python3.7
+      Policies:
+        - S3WritePolicy:
+            BucketName: local-test-demo-bucket
+
 
   Hello2:
     Type: AWS::Serverless::Function
@@ -20,6 +24,11 @@ Resources:
       CodeUri: functions/hello2/
       Handler: app.lambda_handler
       Runtime: python3.7
+      Timeout: 20
+      Policies:
+        - S3ReadPolicy:
+            BucketName: local-test-demo-bucket
+      
 
   HelloStateMachine:
     Type: AWS::Serverless::StateMachine
