@@ -9,7 +9,7 @@
     },
     "hello2": {
       "Type": "Task",
-      "Resource": "${Hello2FunctionArn}",
+      "Resource": "${Hello3FunctionArn}",
       "End": true
     }
   }
