@@ -5,6 +5,11 @@ Description: >
 
   Sample SAM Template for step-funtions
 
+Globals:
+  Function:
+    MemorySize: 512
+    Timeout: 25    
+
 Resources:
 
   Hello1:
@@ -24,7 +29,16 @@ Resources:
       CodeUri: functions/hello2/
       Handler: app.lambda_handler
       Runtime: python3.7
-      Timeout: 20
+      Policies:
+        - S3ReadPolicy:
+            BucketName: local-test-demo-bucket
+  
+  Hello2Java:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/hello2_java/
+      Handler: example.Handler::handleRequest
+      Runtime: java8
       Policies:
         - S3ReadPolicy:
             BucketName: local-test-demo-bucket
@@ -37,8 +51,11 @@ Resources:
       DefinitionSubstitutions:
         Hello1FunctionArn: !GetAtt Hello1.Arn
         Hello2FunctionArn: !GetAtt Hello2.Arn
+        Hello3FunctionArn: !GetAtt Hello2Java.Arn
       Policies:
         - LambdaInvokePolicy:
             FunctionName: !Ref Hello1
         - LambdaInvokePolicy:
             FunctionName: !Ref Hello2
+        - LambdaInvokePolicy:
+            FunctionName: !Ref Hello2Java
