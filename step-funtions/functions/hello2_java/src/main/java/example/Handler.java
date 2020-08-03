@@ -38,7 +38,7 @@ public class Handler implements RequestHandler<Map<String,String>, String>{
       Map<String, Object> jsonMap = mapper.readValue(jsonOb.getObjectContent(), Map.class);
       Instant end3 = Instant.now();
       System.out.println(String.format("[Parse Object]: %s milli", Duration.between(start3, end3).toMillis()));
-      System.out.println(jsonMap.get("body"));
+      // System.out.println(jsonMap.get("body"));
     } catch (IOException e) {
       e.printStackTrace();
     }
