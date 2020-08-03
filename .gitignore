@@ -5,3 +5,4 @@ java-dynamodb-mapper/HelloWorldFunction/dependency-reduced-pom.xml
 java-dynamodb-mapper/HelloWorldFunction/HelloWorld.iml
 .DS_Store
 step-funtions/functions/hello1/partition.json
+step-funtions/functions/hello2_java/hello2_java.iml
